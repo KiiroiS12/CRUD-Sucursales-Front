@@ -1,0 +1,76 @@
+<div mat-dialog-title>
+  <h1>Sucursal</h1>
+</div>
+<form [formGroup]="branchForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Código</mat-label>
+        <input matInput placeholder="000" maxlength="3"
+        inputmode="numeric" pattern="[0-9]*" digitOnly formControlName="code" />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <textarea
+          matInput
+          type="text"
+          formControlName="description"
+          maxlength="250"
+        ></textarea>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <textarea
+          matInput
+          type="text"
+          formControlName="address"
+          maxlength="250"
+        ></textarea>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Identificación</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="identification"
+          maxlength="50"
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de creación</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Seleccione una fecha"
+          [min]="minDate"
+          formControlName="dateCreate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Moneda</mat-label>
+        <mat-select formControlName="idCurrency">
+          <mat-option *ngFor="let currency of currencies" [value]="currency.id">
+            {{ currency.description }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button [mat-dialog-close]="false">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ data ? "Actualizar" : "Añadir" }}
+    </button>
+  </div>
+</form>
